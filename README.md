@@ -1,28 +1,28 @@
 # CSC227 Operating Systems: CPU Scheduler Simulator
 
-[cite_start]This project is a Java-based simulation of a single-CPU scheduling system, developed for the CSC227 Operating Systems course[cite: 1]. [cite_start]The primary objective is to implement and compare three different CPU scheduling algorithms using multithreading to manage processes[cite: 5].
+This project is a Java-based simulation of a single-CPU scheduling system, developed for the CSC227 Operating Systems course. The primary objective is to implement and compare three different CPU scheduling algorithms using multithreading to manage processes.
 
 ## 📋 Project Overview
 
-The simulator reads process information from an external file (`job.txt`), loads them into a ready queue based on memory availability, and executes them according to a user-selected scheduling algorithm. [cite_start]It then calculates and displays performance metrics like average waiting time and turnaround time[cite: 14, 16, 18, 33].
+The simulator reads process information from an external file (`job.txt`), loads them into a ready queue based on memory availability, and executes them according to a user-selected scheduling algorithm. It then calculates and displays performance metrics like average waiting time and turnaround time.
 
 ## ✨ Features Implemented
 
 * **Three Scheduling Algorithms**:
-    * [cite_start]**Shortest Job First (SJF)**: A non-preemptive algorithm that selects the process with the smallest burst time[cite: 9].
-    * [cite_start]**Round-Robin (RR)**: A preemptive algorithm with a time quantum of **7ms**[cite: 10].
-    * [cite_start]**Priority Scheduling**: A non-preemptive algorithm where a higher number indicates a higher priority (1 = Lowest, 128 = Highest)[cite: 11].
+    * **Shortest Job First (SJF)**: A non-preemptive algorithm that selects the process with the smallest burst time.
+    * **Round-Robin (RR)**: A preemptive algorithm with a time quantum of **7ms**.
+    * **Priority Scheduling**: A non-preemptive algorithm where a higher number indicates a higher priority (1 = Lowest, 128 = Highest).
 
-* [cite_start]**Multithreading**: The application utilizes multiple threads for concurrent operations[cite: 31]:
-    * [cite_start]**File Reader Thread**: An independent thread that reads process data from `job.txt`, creates a Process Control Block (PCB) for each, and places them in the job queue[cite: 15].
-    * [cite_start]**Process Loader Thread**: A thread that continuously monitors memory and moves processes from the job queue to the ready queue if sufficient memory is available[cite: 16].
-    * [cite_start]**Main Thread**: Responsible for running the chosen scheduling algorithm[cite: 18].
+* **Multithreading**: The application utilizes multiple threads for concurrent operations:
+    * **File Reader Thread**: An independent thread that reads process data from `job.txt`, creates a Process Control Block (PCB) for each, and places them in the job queue.
+    * **Process Loader Thread**: A thread that continuously monitors memory and moves processes from the job queue to the ready queue if sufficient memory is available.
+    * **Main Thread**: Responsible for running the chosen scheduling algorithm.
 
-* **Memory Management**: Simulates a main memory of **2048 MB**. [cite_start]A process is only loaded into the ready queue if there's enough space for it[cite: 17, 29].
+* **Memory Management**: Simulates a main memory of **2048 MB**. A process is only loaded into the ready queue if there's enough space for it.
 
-* [cite_start]**Starvation Handling**: For the Priority Scheduling algorithm, the simulator detects and resolves starvation using an **aging** technique[cite: 20].
+* **Starvation Handling**: For the Priority Scheduling algorithm, the simulator detects and resolves starvation using an **aging** technique.
 
-* [cite_start]**System Call Simulation**: The program proposes and simulates a set of system calls for process control, memory management, and information maintenance[cite: 19].
+* **System Call Simulation**: The program proposes and simulates a set of system calls for process control, memory management, and information maintenance.
 
 ## 🚀 How to Run
 
@@ -49,7 +49,7 @@ The simulator reads process information from an external file (`job.txt`), loads
 
 The program reads process data from a file named `job.txt`. Each line in the file represents a single job and must follow this format:
 
-[cite_start]`Process_ID:Burst_Time_ms:Priority;Memory_Required_MB` [cite: 22]
+`Process_ID:Burst_Time_ms:Priority;Memory_Required_MB`
 
 **Example `job.txt`:**
 ```
@@ -57,12 +57,11 @@ The program reads process data from a file named `job.txt`. Each line in the fil
 2:13:3;700
 3:20:3;100
 ```
-[cite_start][cite: 23, 24, 25]
 
 ## 📊 Expected Output
 
 The program will:
-1.  [cite_start]Display a step-by-step execution trace for the selected algorithm, preferably as a **Gantt chart**[cite: 34, 35].
+1.  Display a step-by-step execution trace for the selected algorithm, preferably as a **Gantt chart**.
 2.  Show the start and end times for each process.
-3.  [cite_start]For Priority scheduling, it will indicate if any process suffered from starvation[cite: 34].
-4.  [cite_start]Finally, it will print a comparison of the **average waiting time** and **average turnaround time** for all jobs[cite: 33].
+3.  For Priority scheduling, it will indicate if any process suffered from starvation.
+4.  Finally, it will print a comparison of the **average waiting time** and **average turnaround time** for all jobs.
