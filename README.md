@@ -1,6 +1,6 @@
 # CSC227 Operating Systems: CPU Scheduler Simulator
 
-This project is a Java-based simulation of a single-CPU scheduling system, developed for the CSC227 Operating Systems course. The primary objective is to implement and compare three different CPU scheduling algorithms using multithreading to manage processes.
+This project is a Java-based simulation of a single-CPU scheduling system, developed for the CSC227 Operating Systems course. The primary objective is to implement and compare three different CPU scheduling algorithms using multithreading to manage processes. The source code lives under the `simulator.*` package hierarchy, and matching documentation is available in the `doc/` directory.
 
 ## 📋 Project Overview
 
@@ -26,7 +26,7 @@ The simulator reads process information from an external file (`job.txt`), loads
 
 - **System Call Simulation**: The program proposes and simulates a set of system calls for process control, memory management, and information maintenance.
 
-## � Assumptions & Constraints
+## 📌 Assumptions & Constraints
 
 - All jobs arrive at time 0; ordering in `job.txt` defines dispatch tie-breakers.
 - `job.txt` may list at most 30 jobs, and their combined memory requirement must not exceed **2048 MB**.
@@ -34,7 +34,7 @@ The simulator reads process information from an external file (`job.txt`), loads
 - The simulator always runs with the reader and loader threads in addition to the main scheduling thread.
 - Aging in priority scheduling increases dynamic priority every five time units spent waiting (up to priority 128).
 
-## �🚀 How to Run
+## 🚀 How to Run
 
 1.  **Prerequisites**:
 
@@ -43,19 +43,32 @@ The simulator reads process information from an external file (`job.txt`), loads
 2.  **Compilation**:
 
     - Open your terminal or command prompt.
-    - Navigate to the source code directory.
-    - Compile the Java files:
+    - Navigate to the project root (`CSC227-OS-Project`).
+    - Compile all sources into the `out/` directory (create it first if needed). Two common approaches:
+
+      **macOS/Linux**
+
       ```bash
-      javac *.java
+      find simulator -name "*.java" > sources.txt
+      javac -d out @sources.txt
       ```
 
+      **Windows PowerShell**
+
+      ```powershell
+      Get-ChildItem -Recurse simulator -Filter *.java | ForEach-Object FullName > sources.txt
+      javac -d out @sources.txt
+      ```
+
+      After compiling you can remove `sources.txt` if you no longer need it.
+
 3.  **Execution**:
-    - Make sure the `job.txt` file is in the same directory.
+    - Ensure `job.txt` is present alongside the compiled classes.
     - Run the simulator entry point:
       ```bash
-      java Main
+      java -cp out simulator.app.Main
       ```
-    - The program will then prompt you to choose a scheduling algorithm.
+    - The program will prompt you to choose a scheduling algorithm interactively.
 
 ## 📁 Input File Format (`job.txt`)
 
