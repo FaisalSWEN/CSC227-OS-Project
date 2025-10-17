@@ -42,6 +42,11 @@ rectangle "OS Simulator" as SYSTEM <<boundary>> {
 		MAIN -[hidden]down-> SR
 		SR -[hidden]down-> SC
 	}
+	note right of APP
+		Orchestrates CLI flow,
+		scheduler selection,
+		and simulation lifecycle.
+	end note
 
 	package "Core Engine" as CORE #D6E5FA {
 		component SystemCallHandler as SCH #D6E5FA
@@ -56,16 +61,31 @@ rectangle "OS Simulator" as SYSTEM <<boundary>> {
 		SLICE -[hidden]down-> REPORT
 		REPORT -[hidden]down-> SRES
 	}
+	note right of CORE
+		Coordinates execution slices,
+		tracks process state, and
+		produces scheduling metrics.
+	end note
 
 	package "I/O Subsystem" as IOZONE #FDE7D6 {
 		component ProcessLoader as PL #FDE7D6
 		component JobReader as JR #FDE7D6
 		PL -[hidden]down-> JR
 	}
+	note right of IOZONE
+		Streams jobs from file and
+		builds process control blocks
+		before admission.
+	end note
 
 	package "Memory Management" as MEM #E1F5E0 {
 		component MemoryManager as MM #E1F5E0
 	}
+	note right of MEM
+		Simulates main memory capacity
+		and allocation decisions for
+		incoming processes.
+	end note
 
 	package "Scheduling Strategies" as SCHEDZONE #FFF2CC {
 		component Scheduler as SCHED <<interface>> #FFF2CC
@@ -76,6 +96,11 @@ rectangle "OS Simulator" as SYSTEM <<boundary>> {
 		RR -[hidden]down-> PS
 		PS -[hidden]down-> SJF
 	}
+	note right of SCHEDZONE
+		Implements interchangeable
+		CPU scheduling policies that
+		consume ready queues.
+	end note
 
 	APP -[hidden]-> CORE
 	CORE -[hidden]-> SCHEDZONE
