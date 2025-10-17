@@ -71,15 +71,12 @@ public class SimulationRunner {
                                         ProcessLoader loader,
                                         AtomicBoolean readerFinished,
                                         AtomicInteger totalJobs) throws InterruptedException {
-        while (true) {
-            if (readerFinished.get()) {
-                int declaredJobs = totalJobs.get();
-                if (readyQueue.size() >= declaredJobs) {
-                    return;
-                }
-                if (loader.isLoadingComplete()) {
-                    return;
-                }
+        while (readyQueue.isEmpty()) {
+            if (readerFinished.get() && loader.isLoadingComplete()) {
+                break;
+            }
+            if (readerFinished.get() && totalJobs.get() == 0) {
+                break;
             }
             Thread.sleep(5);
         }

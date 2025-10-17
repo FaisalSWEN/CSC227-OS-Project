@@ -39,7 +39,6 @@ public class JobReader extends Thread {
 
     @Override
     public void run() {
-        int cumulativeMemory = 0;
         try (BufferedReader reader = Files.newBufferedReader(jobFilePath)) {
             String line;
             while ((line = reader.readLine()) != null) {
@@ -52,9 +51,10 @@ public class JobReader extends Thread {
                     throw new IllegalStateException("job.txt exceeds maximum supported job count of " + MAX_JOBS);
                 }
                 ProcessControlBlock pcb = parseLine(line, currentCount);
-                cumulativeMemory += pcb.getMemoryRequired();
-                if (cumulativeMemory > MAX_TOTAL_MEMORY) {
-                    throw new IllegalStateException("job.txt requires more than " + MAX_TOTAL_MEMORY + "MB of memory");
+                if (pcb.getMemoryRequired() > MAX_TOTAL_MEMORY) {
+                    throw new IllegalStateException("Process " + pcb.getId()
+                            + " requires " + pcb.getMemoryRequired()
+                            + "MB which exceeds the available memory of " + MAX_TOTAL_MEMORY + "MB");
                 }
                 systemCalls.createProcess(pcb);
                 pcb.markQueued();
