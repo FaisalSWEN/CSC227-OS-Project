@@ -25,12 +25,12 @@ public class SimulationContext {
     private final AtomicInteger totalJobs;
 
     public SimulationContext(BlockingQueue<ProcessControlBlock> readyQueue,
-    MemoryManager memoryManager,
-    SystemCallHandler systemCalls,
-    SimulationClock clock,
-    ProcessLoader loader,
-    AtomicBoolean readerFinished,
-    AtomicInteger totalJobs) {
+                             MemoryManager memoryManager,
+                             SystemCallHandler systemCalls,
+                             SimulationClock clock,
+                             ProcessLoader loader,
+                             AtomicBoolean readerFinished,
+                             AtomicInteger totalJobs) {
         this.readyQueue = readyQueue;
         this.memoryManager = memoryManager;
         this.systemCalls = systemCalls;
