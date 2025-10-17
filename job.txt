@@ -1,0 +1,6 @@
+# Sample job set: id:burst:priority;memory
+1:25:4;500
+2:13:3;700
+3:20:3;100
+4:9:6;256
+5:18:2;400
