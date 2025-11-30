@@ -49,14 +49,14 @@ The simulator reads process information from an external file (`job.txt`), loads
       **macOS/Linux**
 
       ```bash
-      find simulator -name "*.java" > sources.txt
+      find src/simulator -name "*.java" > sources.txt
       javac -d out @sources.txt
       ```
 
       **Windows PowerShell**
 
       ```powershell
-      Get-ChildItem -Recurse simulator -Filter *.java | ForEach-Object FullName > sources.txt
+      Get-ChildItem -Recurse src/simulator -Filter *.java | ForEach-Object FullName > sources.txt
       javac -d out "@sources.txt"
       ```
 
